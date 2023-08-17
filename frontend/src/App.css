@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+/* movies list css */
+div.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+div.movie-item {
+  margin: 10px;
+  text-align: center;
+}
+
+img.movie-image {
+  max-width: 150px;
+  height: auto;
+}
+
+button.vote-button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* movie card */
+div.movie-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+img.movie-image {
+  max-width: 100%;
+  height: 200px; /* Limiting the height to 180px */
+  object-fit: cover; /* This will ensure that the image covers the space without distortion */
+}
+
+h3.movie-title {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+p.movie-score {
+  font-size: 14px;
+  color: #333;
+}
+
+div.star-rating {
+  display: flex;
+  justify-content: center;
+}
+
+span.star {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 5px;
+  color: #ccc;
+}
+
+span.star.selected {
+  color: gold;
+}
+
+/* search bar css */
+div.search-bar {
+  margin: 20px; /* Increase margin if needed */
+  display: flex;
+  justify-content: center;
+}
+
+input.search-input {
+  width: 500px; /* Increase the width of the search bar */
+  padding: 10px; /* Increase padding for a larger input field */
+  margin-right: 10px;
+  font-size: 18px; /* Increase font size */
+  font-family: 'Arial', sans-serif; /* You can replace with a font of your choice */
+  border: 2px solid #ccc; /* Add a border if desired */
+}
+
+button.search-button {
+  padding: 10px 20px; /* Increase padding for a larger button */
+  cursor: pointer;
+  font-size: 18px; /* Increase font size to match the input */
+  font-family: 'Arial', sans-serif; /* You can replace with a font of your choice */
+}
+
+/* movie page */
+div.movie-page {
+  padding: 20px;
+  text-align: center;
+}
+
+img.movie-image {
+  max-width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+h1.movie-title,
+h3 {
+  font-size: 24px;
+  margin: 15px 0;
+}
+
+p.movie-tagline,
+p.movie-overview,
+p.movie-genres,
+p.movie-date,
+p.movie-lang,
+p.movie-director,
+p.movie-popularity,
+p.movie-vote,
+p.movie-votes-count {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+div.movie-cast p {
+  font-size: 14px;
+  margin: 5px 0;
+}
