@@ -3,7 +3,8 @@ node_modules/
 frontend/build/
 
 # Python (FastAPI)
-backend/venv/
+.venv
+backend/public/fe
 *.pyc
 __pycache__/
 
