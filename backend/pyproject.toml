@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "movies-be"
+version = "0.1.0"
+description = ""
+authors = ["itamarco <itc404@gmail.com>"]
+readme = "README.md"
+packages = [{include = "movies_be"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+sqlalchemy = "^2.0.19"
+fastapi = "^0.101.1"
+uvicorn = "^0.23.2"
+psycopg2 = "^2.9.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

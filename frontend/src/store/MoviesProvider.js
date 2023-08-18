@@ -1,8 +1,7 @@
 import React, { useReducer } from 'react';
 import { moviesReducer } from './MoviesReducer';
 import { MoviesContext } from './MoviesContext';
-import moviesJson from '../assets/movies-map.json'; // Assuming you have imported the JSON file
-
+import axios from 'axios';
 
 export const MoviesProvider = ({ children }) => {
   const initialState = { movies: [] };
@@ -12,8 +11,15 @@ export const MoviesProvider = ({ children }) => {
    // Function to load initial movies
    const loadInitialMovies = async () => {
     // TODO
-    const fetchedMovies =  moviesJson
-    dispatch({ type: 'SET_MOVIES', payload: fetchedMovies });
+    axios.get('/movies-map')
+      .then((response) => {
+        // Use the data from movies-map.json here
+        dispatch({ type: 'SET_MOVIES', payload: response.data });
+      })
+      .catch((error) => {
+        console.error("An error occurred while fetching the data:", error);
+      });
+    
   };
 
   return (
