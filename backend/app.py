@@ -4,15 +4,16 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
 from starlette.responses import HTMLResponse, FileResponse
 
 from db import get_db
+from utils import SimilarMovies
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="public/fe/static"), name="static")
 
+similar_movies = SimilarMovies()
 
 @app.get("/")
 def read_root():
@@ -33,9 +34,8 @@ def get_recommendation_by_user(user_id: str, db: Session = Depends(get_db)):
 
 
 @app.get("/recommendation/byMovie/{movie_id}")
-def get_recommendation_by_movie(movie_id: int, db: Session = Depends(get_db)):
-    # Recommendation logic here
-    pass
+def get_recommendation_by_movie(movie_id: int, db: Session = Depends(get_db)) -> list[int]:
+    return similar_movies.get_recommendations_by_id(movie_id)
 
 
 @app.post("/vote")
