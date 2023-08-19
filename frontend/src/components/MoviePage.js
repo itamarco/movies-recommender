@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MoviesContext } from '../store/MoviesContext';
 import SimilarMoviesList from './SimilarMovies';
@@ -7,10 +7,11 @@ import TmdbImage from './TmdbImage';
 const MoviePage = () => {
     const { movieId } = useParams();
     const {movies} =  useContext(MoviesContext);
-    const movie = movies[movieId || 0]
 
+    const movie = movies ? movies[movieId] : null;
+    
   return (
-    <div className="movie-page">
+    movie ? <div className="movie-page">
       <TmdbImage className="movie-image" path={movie.poster} alt={movie.title} />
       <h1 className="movie-title">{movie.title}</h1>
       <p className="movie-tagline">{movie.tagline}</p>
@@ -30,7 +31,8 @@ const MoviePage = () => {
       </div>
 
       <SimilarMoviesList movieId={movieId} />
-    </div>
+    </div> : 
+    <h1>Loading...</h1>
   );
 };
 

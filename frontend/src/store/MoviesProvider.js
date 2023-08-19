@@ -10,7 +10,6 @@ export const MoviesProvider = ({ children }) => {
 
    // Function to load initial movies
    const loadInitialMovies = async () => {
-    // TODO
     axios.get('/movies-map')
       .then((response) => {
         // Use the data from movies-map.json here
