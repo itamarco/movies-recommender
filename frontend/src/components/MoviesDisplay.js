@@ -29,12 +29,6 @@ const MoviesDisplay = () => {
     setDisplayMovies((prevMovies) => [...prevMovies, ...newMovies]);
   };
 
-
-
-  const handleVote = (movieId, userId) => {
-    axios.post('/vote', { movieId, userId });
-  };
-
   const handleSearch = (term) => {
     setSearchTerm(term);
     setDisplayMovies([]); // Clear the current movies

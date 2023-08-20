@@ -3,13 +3,14 @@ import { useParams } from 'react-router-dom';
 import { MoviesContext } from '../store/MoviesContext';
 import SimilarMoviesList from './SimilarMovies';
 import TmdbImage from './TmdbImage';
+import Vote from './Vote';
 
 const MoviePage = () => {
     const { movieId } = useParams();
     const {movies} =  useContext(MoviesContext);
 
     const movie = movies ? movies[movieId] : null;
-    
+
   return (
     movie ? <div className="movie-page">
       <TmdbImage className="movie-image" path={movie.poster} alt={movie.title} />
@@ -23,6 +24,7 @@ const MoviePage = () => {
       <p className="movie-popularity">Popularity: {movie.popularity}</p>
       <p className="movie-vote">Vote Average: {movie.vote_average} / 10</p>
       <p className="movie-votes-count">Votes Count: {movie.vote_count}</p>
+      <Vote movieId={movie.id}/>
       <div className="movie-cast">
         <h3>Cast:</h3>
         {movie.cast.map((actor) => (
