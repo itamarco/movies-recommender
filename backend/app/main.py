@@ -67,4 +67,4 @@ A catch-all route in FastAPI to serve the index.html file for any other requests
 
 @app.get("/{path:path}")
 def read_root(path: str):
-    return FileResponse("public/index.html")
+    return FileResponse("public/fe/index.html")

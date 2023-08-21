@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["itamarco <itc404@gmail.com>"]
 readme = "README.md"
-packages = [{include = "movies_be"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
