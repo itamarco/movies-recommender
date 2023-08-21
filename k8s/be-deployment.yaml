@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movies-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movies-be
+  template:
+    metadata:
+      labels:
+        app: movies-be
+    spec:
+      containers:
+      - name: movies-be
+        image: itamarco/movies-be
+        env:
+        - name: DATABASE_URL
+          value: postgresql://movies:movies-pass@postgres-db:5432/movies
+        ports:
+        - containerPort: 8000
