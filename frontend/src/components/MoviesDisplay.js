@@ -10,15 +10,32 @@ const MoviesDisplay = () => {
   const [displayMovies, setDisplayMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [firstGenre, setFirstGenre] = useState("");
+  const [secondGenre, setSecondGenre] = useState("");
   const {movies} =  useContext(MoviesContext);
   const filteredMovies = useMemo(() => {
     const moviesList = Object.values(movies)
-    return searchTerm
-      ? moviesList.filter((movie) =>
-          movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      : moviesList;
-  }, [searchTerm, movies]); // Recalculate filteredMovies whenever searchTerm changes
+    let filteredMovies = moviesList;
+    if (searchTerm) {
+      filteredMovies = filteredMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (firstGenre) {
+      filteredMovies = filteredMovies.filter( (movie) => 
+        movie.genres.includes(firstGenre)
+      )
+    }
+
+    if (secondGenre) {
+      filteredMovies = filteredMovies.filter((movie) => 
+        movie.genres.includes(secondGenre)
+      );
+    }
+
+    return filteredMovies;
+  }, [searchTerm, firstGenre, secondGenre, movies]); // Recalculate filteredMovies whenever searchTerm changes
 
 
   const fetchMovies = () => {
@@ -29,8 +46,10 @@ const MoviesDisplay = () => {
     setDisplayMovies((prevMovies) => [...prevMovies, ...newMovies]);
   };
 
-  const handleSearch = (term) => {
+  const handleSearch = (term, firstGenre, secondGenre) => {
     setSearchTerm(term);
+    setFirstGenre(firstGenre);
+    setSecondGenre(secondGenre);
     setDisplayMovies([]); // Clear the current movies
     setPage(1); // Reset to the first page
   };
@@ -61,7 +80,7 @@ const MoviesDisplay = () => {
   
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} onGenresSelected={console.log} />
       <MoviesList movies={displayMovies} />
     </div>
   );

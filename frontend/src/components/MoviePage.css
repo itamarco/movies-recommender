@@ -1,0 +1,36 @@
+div.movie-page {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+div.movie-left {
+  flex: 1;
+  text-align: center;
+}
+
+div.movie-right {
+  flex: 2;
+  padding-left: 20px;
+  text-align: center; /* Center the text in the right pane */
+}
+
+img.movie-image {
+  max-width: 100%;
+  height: auto;
+}
+
+div.movie-votes,
+div.movie-popularity {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+div.movie-cast p {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
