@@ -17,9 +17,12 @@ const MoviesDisplay = () => {
     const moviesList = Object.values(movies)
     let filteredMovies = moviesList;
     if (searchTerm) {
-      filteredMovies = filteredMovies.filter((movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      filteredMovies = filteredMovies.filter((movie) => { 
+        const term = searchTerm.toLowerCase()
+        return movie.title.toLowerCase().includes(term) ||
+          (movie.director && movie.director.toLowerCase().includes(term)) ||
+          movie.cast.map( p => p.name ).join(', ').toLowerCase().includes(term);
+      });
     }
 
     if (firstGenre) {
