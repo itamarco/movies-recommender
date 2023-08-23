@@ -19,11 +19,10 @@ class SimilarMovies:
         # Sort the movies based on the similarity scores
         similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
 
-        # Get the scores of the 10 most similar movies
+        # Get the scores of the 15 most similar movies
         similarity_scores = similarity_scores[1:16]
 
         # Get the movie indices
         movies_idx = [i[0] for i in similarity_scores]
 
-        # Return the top 10 most similar movies
         return self.movie_id_to_idx_series.iloc[movies_idx].index.tolist()

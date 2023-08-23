@@ -16,7 +16,7 @@ const MoviePage = () => {
     <div>
       <div className="movie-page">
         <div className="movie-left">
-          <TmdbImage path={movie.poster} alt={movie.title} className="movie-image"/>
+          <TmdbImage path={movie.poster_path} alt={movie.title} className="movie-image"/>
           <div className="movie-votes">
             <p>Vote Average: {movie.vote_average}</p>
             <p>Vote Count: {movie.vote_count}</p>
@@ -28,7 +28,7 @@ const MoviePage = () => {
         <div className="movie-right">
           <h1>{movie.title}</h1>
           <p className="movie-tagline">{movie.tagline}</p>
-          <p className="movie-overview">{movie.overview}</p>
+          <p className="movie-overview">{movie.overview_he}</p>
           <div className="movie-genres">
             {movie.genres.join(', ')}
           </div>

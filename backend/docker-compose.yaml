@@ -6,14 +6,14 @@ services:
     ports:
       - "8000:80"
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/movies
+      - DATABASE_URL=postgresql://user:password@db:5433/movies
     depends_on:
       - db
 
   db:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
