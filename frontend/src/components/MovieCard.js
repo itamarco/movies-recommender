@@ -8,7 +8,7 @@ const MovieCard = ({ movie, onVote }) => {
 
   return (
     <div className="movie-card">
-      <Link to={`/movie/${movie.id}`}>
+      <Link to={`/movies/${movie.id}`}>
         <TmdbImage path={movie.poster_path} alt={movie.title} className="movie-image" />
       </Link>
         <h3 className="movie-title">{movie.title} ({movie.year})</h3>

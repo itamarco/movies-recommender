@@ -1,0 +1,19 @@
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+.top-bar nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.top-bar nav a:hover {
+  text-decoration: underline;
+}

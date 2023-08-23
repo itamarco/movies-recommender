@@ -6,6 +6,11 @@ h1 {
   text-align: center;
 }
 
+.main-content {
+  padding-top: 40px; /* Adjust this value to match the height of your top bar */
+}
+
+
 /* movies list css */
 div.movies-list {
   display: flex;

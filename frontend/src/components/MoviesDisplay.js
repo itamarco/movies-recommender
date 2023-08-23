@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
-import axios from 'axios';
 import SearchBar from './SearchBar';
 import MoviesList from './MoviesList';
 import { MoviesContext } from '../store/MoviesContext';
@@ -83,7 +82,7 @@ const MoviesDisplay = () => {
   
   return (
     <div>
-      <SearchBar onSearch={handleSearch} onGenresSelected={console.log} />
+      <SearchBar onSearch={handleSearch} />
       <MoviesList movies={displayMovies} />
     </div>
   );
