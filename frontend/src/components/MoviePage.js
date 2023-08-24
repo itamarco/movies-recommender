@@ -23,7 +23,11 @@ const MoviePage = ({mediaType}) => {
     <div>
       <div className="movie-page">
         <div className="movie-left">
-          <TmdbImage path={movie.poster_path} alt={movie.title} className="movie-image"/>
+          <TmdbImage
+            path={movie.poster_path}
+            alt={movie.title}
+            className="movie-image"
+          />
           <div className="movie-votes">
             <p>Vote Average: {movie.vote_average}</p>
             <p>Vote Count: {movie.vote_count}</p>
@@ -36,19 +40,25 @@ const MoviePage = ({mediaType}) => {
           <h1>{movie.title || movie.name}</h1>
           <p className="movie-tagline">{movie.tagline}</p>
           <p className="movie-overview">{movie.overview_he}</p>
-          <div className="movie-genres">
-            {movie.genres.join(', ')}
-          </div>
+          <div className="movie-genres">{movie.genres.join(", ")}</div>
           <div className="movie-cast">
-            <h3>Cast:</h3>
-            {movie.cast.map((castMember) => (
-              <p key={castMember.name}>
-                {castMember.name} as {castMember.character}
-              </p>
-            ))}
+            <div className="cast-gallery">
+              {movie.cast.map((castMember) => (
+                <div className="cast-member" key={castMember.name}>
+                  <TmdbImage
+                    path={castMember.profile_path}
+                    alt={castMember.name}
+                    className="cast-profile-image"
+                  />
+                  <p>{castMember.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="movie-director">By: {movie.director || movie.creators.join(", ")}</p>
-          <Vote movieId={movie.id}/>
+          <p className="movie-director">
+            By: {movie.director || movie.creators.join(", ")}
+          </p>
+          <Vote movieId={movie.id} />
         </div>
       </div>
       <SimilarMoviesList movieId={movieId} mediaType={mediaType} />

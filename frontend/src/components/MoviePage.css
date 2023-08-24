@@ -27,10 +27,33 @@ div.movie-popularity {
   margin: 10px 0;
 }
 
+.movie-genres {
+  font-weight: bold;
+}
+
 div.movie-cast p {
   font-size: 14px;
   margin: 5px 0;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+}
+
+.movie-cast .cast-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-cast .cast-member {
+  text-align: center;
+  margin: 10px;
+}
+
+.movie-cast .cast-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
 }
