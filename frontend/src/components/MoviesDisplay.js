@@ -5,22 +5,26 @@ import { MoviesContext } from '../store/MoviesContext';
 
 const PAGE_SIZE = 20; // Number of movies per page
 
-const MoviesDisplay = () => {
+const MoviesDisplay = ({mediaType}) => {
   const [displayMovies, setDisplayMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [firstGenre, setFirstGenre] = useState("");
   const [secondGenre, setSecondGenre] = useState("");
-  const {movies} =  useContext(MoviesContext);
+
+  const {movies, tvs} =  useContext(MoviesContext);
+
   const filteredMovies = useMemo(() => {
-    const moviesList = Object.values(movies)
-    let filteredMovies = moviesList;
+   
+    let filteredMovies = mediaType == 'movie' ? Object.values(movies) : Object.values(tvs);
     if (searchTerm) {
       filteredMovies = filteredMovies.filter((movie) => { 
         const term = searchTerm.toLowerCase()
-        return movie.title.toLowerCase().includes(term) ||
-          (movie.director && movie.director.toLowerCase().includes(term)) ||
-          movie.cast.map( p => p.name ).join(', ').toLowerCase().includes(term);
+        return movie.title?.toLowerCase().includes(term) ||
+           movie.name?.toLowerCase().includes(term) ||
+           movie.director?.toLowerCase().includes(term) ||
+           movie.creators?.map( c => c.name).join(', ').toLowerCase().includes(term) ||
+           movie.cast.map( p => p.name ).join(', ').toLowerCase().includes(term);
       });
     }
 
@@ -37,7 +41,7 @@ const MoviesDisplay = () => {
     }
 
     return filteredMovies;
-  }, [searchTerm, firstGenre, secondGenre, movies]); // Recalculate filteredMovies whenever searchTerm changes
+  }, [searchTerm, firstGenre, secondGenre, mediaType, movies, tvs]);
 
 
   const fetchMovies = () => {
@@ -69,7 +73,7 @@ const MoviesDisplay = () => {
     // Reset movies and page when searchTerm changes
     setDisplayMovies([]);
     setPage(1);
-  }, [searchTerm]);
+  }, [searchTerm, mediaType]);
 
   useEffect(() => {
     fetchMovies();

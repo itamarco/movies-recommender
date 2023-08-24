@@ -7,15 +7,27 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse, FileResponse
 
+from app.utils import load_movies_similarity_models, SimilarityRecommender, load_tvs_similarity_models
 from db import get_db
 from models import Vote
-from utils import SimilarMovies
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="public/fe/static"), name="static")
 
-similar_movies = SimilarMovies()
+
+def init_movies_recommender():
+    matrix, id_to_idx = load_movies_similarity_models()
+    return SimilarityRecommender(matrix, id_to_idx)
+
+
+def init_tvs_recommender():
+    matrix, id_to_idx = load_tvs_similarity_models()
+    return SimilarityRecommender(matrix, id_to_idx)
+
+
+similar_movies = init_movies_recommender()
+similar_tvs = init_tvs_recommender()
 
 
 @app.get("/")
@@ -31,6 +43,12 @@ def get_movies_map():
     return FileResponse(file_path)
 
 
+@app.get("/tvs-map")
+def get_movies_map():
+    file_path = Path("public/tvs-map.json")
+    return FileResponse(file_path)
+
+
 @app.get("/recommendation/byUser/{user_id}")
 def get_recommendation_by_user(user_id: str, db: Session = Depends(get_db)):
     # Recommendation logic here
@@ -40,6 +58,11 @@ def get_recommendation_by_user(user_id: str, db: Session = Depends(get_db)):
 @app.get("/recommendation/byMovie/{movie_id}")
 def get_recommendation_by_movie(movie_id: int, db: Session = Depends(get_db)) -> list[int]:
     return similar_movies.get_recommendations_by_id(movie_id)
+
+
+@app.get("/recommendation/byTv/{tv_id}")
+def get_recommendation_by_movie(tv_id: int, db: Session = Depends(get_db)) -> list[int]:
+    return similar_tvs.get_recommendations_by_id(tv_id)
 
 
 class VotePayload(BaseModel):
@@ -54,7 +77,7 @@ def post_vote(movieId: int, payload: VotePayload, db: Session = Depends(get_db))
         vote=payload.vote
     )
 
-    merged_vote = db.merge(vote) # upsert
+    merged_vote = db.merge(vote)  # upsert
     db.commit()
     db.refresh(merged_vote)
     return merged_vote

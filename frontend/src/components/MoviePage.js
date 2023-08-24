@@ -6,11 +6,18 @@ import SimilarMoviesList from "./SimilarMovies";
 import TmdbImage from "./TmdbImage";
 import Vote from "./Vote";
 
-const MoviePage = () => {
+const MoviePage = ({mediaType}) => {
   const { movieId } = useParams();
-  const { movies } = useContext(MoviesContext);
+  const { movies, tvs } = useContext(MoviesContext);
+  
+  const [movie, setMovie] = useState(null)
 
-  const movie = movies ? movies[movieId] : null;
+  useEffect( () => {
+    const movieList = mediaType == "movie" ? movies : tvs;
+    if (movieId) {
+      setMovie(movieList[movieId])
+    }
+  }, [movieId, mediaType, movies, tvs])
 
   return movie ? (
     <div>
@@ -26,7 +33,7 @@ const MoviePage = () => {
           </div>
         </div>
         <div className="movie-right">
-          <h1>{movie.title}</h1>
+          <h1>{movie.title || movie.name}</h1>
           <p className="movie-tagline">{movie.tagline}</p>
           <p className="movie-overview">{movie.overview_he}</p>
           <div className="movie-genres">
@@ -40,34 +47,16 @@ const MoviePage = () => {
               </p>
             ))}
           </div>
-          <p className="movie-director">Director: {movie.director}</p>
+          <p className="movie-director">By: {movie.director || movie.creators.join(", ")}</p>
+          <Vote movieId={movie.id}/>
         </div>
       </div>
-      <SimilarMoviesList movieId={movieId} />
+      <SimilarMoviesList movieId={movieId} mediaType={mediaType} />
     </div>
   ) : (
     <h1>Loading...</h1>
   );
 
-  // <div className="movie-page">
-  //   <TmdbImage className="movie-image" path={movie.poster} alt={movie.title} />
-  //   <h1 className="movie-title">{movie.title}</h1>
-  //   <p className="movie-tagline">{movie.tagline}</p>
-  //   <p className="movie-overview">{movie.overview}</p>
-  //   <p className="movie-genres">Genres: {movie.genres.join(', ')}</p>
-  //   <p className="movie-date">Release Date: {movie.date}</p>
-  //   <p className="movie-lang">Language: {movie.lang}</p>
-  //   <p className="movie-director">Director: {movie.director}</p>
-  //   <p className="movie-popularity">Popularity: {movie.popularity}</p>
-  //   <p className="movie-vote">Vote Average: {movie.vote_average} / 10</p>
-  //   <p className="movie-votes-count">Votes Count: {movie.vote_count}</p>
-  //   <Vote movieId={movie.id}/>
-  //   <div className="movie-cast">
-  //     <h3>Cast:</h3>
-  //     {movie.cast.map((actor) => (
-  //       <p key={actor.name}>{actor.name} as {actor.character}</p>
-  //     ))}
-  //   </div>
 };
 
 export default MoviePage;

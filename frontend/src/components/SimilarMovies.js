@@ -3,19 +3,23 @@ import MoviesList from './MoviesList';
 import axios from 'axios';
 import { MoviesContext } from '../store/MoviesContext';
 
-const SimilarMoviesList = ({ movieId }) => {
+const SimilarMoviesList = ({ movieId, mediaType }) => {
   const [similarMovies, setSimilarMovies] = useState([]);
-  const {movies} = useContext(MoviesContext);
-
+  const {movies, tvs} = useContext(MoviesContext);
+  
   useEffect(() => {
     getSimilarMovies(movieId)
   }, [movieId]);
-
+  
   const getSimilarMovies = async (movieId) => {
     try {
-      const response = await axios.get(`/recommendation/byMovie/${movieId}`)
+      const pathSuffix = mediaType == "movie" ? "byMovie" : "byTv";
+      const response = await axios.get(`/recommendation/${pathSuffix}/${movieId}`)
       const movieIds = response.data;
-      const similarMovies = movieIds.map(id => movies[id])
+      const similarMovies =
+        mediaType == "movie"
+          ? movieIds.map((id) => movies[id])
+          : movieIds.map((id) => tvs[id]);
       setSimilarMovies(similarMovies)
     } catch (error) {
       console.error(error)

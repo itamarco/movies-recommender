@@ -8,7 +8,7 @@ const TopBar = () => {
     <div className="top-bar">
       <nav>
         <Link to="/movies">Movies</Link>
-        <Link to="/tv">TV-Series</Link>
+        <Link to="/tvs">TV-Series</Link>
       </nav>
     </div>
   );

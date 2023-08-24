@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:80"
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5433/movies
+      - DATABASE_URL=postgresql://user:password@db:5432/movies
     depends_on:
       - db
 

@@ -1,5 +1,5 @@
 # Start with a base Python image
-FROM python:3.9-slim
+FROM python:3.9-slim-buster
 
 # dependencies for psycog2
 RUN apt-get update \

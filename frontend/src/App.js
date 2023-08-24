@@ -18,11 +18,13 @@ const App = () => {
   return (
     <Router>
       <TopBar />
-      <div className='main-content'>
+      <div className="main-content">
         <Routes>
           <Route path="/" element={<Navigate to="/movies" />} />
-          <Route path="/movies" element={<MoviesDisplay />} />
-          <Route path="/movies/:movieId" element={<MoviePage />} />
+          <Route path="/movies" element={<MoviesDisplay mediaType="movie" />} />
+          <Route path="/tvs" element={<MoviesDisplay mediaType="tv" />} />
+          <Route path="/movies/:movieId" element={<MoviePage mediaType="movie" />} />
+          <Route path="/tvs/:movieId" element={<MoviePage mediaType="tv" />} />
         </Routes>
       </div>
     </Router>
