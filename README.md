@@ -2,6 +2,9 @@
 
 This repository contains the code for the Movie Recommender App, a React application, backed with fastapi app, that provides movie recommendations based on user preferences and similar movie content.
 
+![My Image Description](./readme/screenshot.png)
+
+
 ## Structure
 
 - `backend/`: Contains the FastAPI application code.
@@ -64,3 +67,9 @@ npm start
 cd notebooks
 conda create --name ntoebooks python=3.9
 ```
+
+# Dataset for similarity recommendation
+
+The datasets are located [here](./notebooks/datasets/mine/). They consist of **11,000 Movies** and **3,000 TV series** that were scraped from the TMDB API.
+
+The scraper code can be found in the [movies](./notebooks/tmdb-movies-scraper.ipynb) and [tvs](./notebooks/tmdb-tv-scraper.ipynb) notebooks.

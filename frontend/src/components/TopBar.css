@@ -6,11 +6,16 @@
   background-color: #333;
   color: white;
   padding: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .top-bar nav a {
   margin: 0 15px;
   text-decoration: none;
+  font-weight: 800;
   color: white;
 }
 
