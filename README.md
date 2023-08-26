@@ -22,14 +22,8 @@ This repository contains the code for the Movie Recommender App, a React applica
 ## Prerequisites
 
 - Docker: You'll need [Docker](https://www.docker.com/get-started) installed on your machine.
-- npm
 
  ```bash
-cd frontend
-npm install
-npm run build
-
-cd ../backend
 docker-compose up
 ```
 

@@ -4,7 +4,6 @@ frontend/build/
 
 # Python (FastAPI)
 .venv
-backend/public/fe
 *.pyc
 __pycache__/
 
