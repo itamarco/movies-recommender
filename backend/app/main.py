@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse, FileResponse
 
-from app.utils import load_movies_similarity_models, SimilarityRecommender, load_tvs_similarity_models
+from utils import load_movies_similarity_models, SimilarityRecommender, load_tvs_similarity_models
 from db import get_db
 from models import Vote
 
