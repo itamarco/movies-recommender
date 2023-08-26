@@ -1,11 +1,12 @@
 import "./SearchBar.css"
 import React, { useEffect, useState } from "react";
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, mediaType }) => {
   const [firstGenre, setFirstGenre] = useState("");
   const [secondGenre, setSecondGenre] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [genres, setGenres] = useState([]);
 
-  const genres = [
+  const movieGenres = [
     "Action",
     "Adventure",
     "Animation",
@@ -27,6 +28,18 @@ const SearchBar = ({ onSearch }) => {
     "Western",
   ];
 
+  const tvGenres = [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure",
+    "Mystery",
+    "Animation", 
+    'Crime', 
+    'Comedy',
+    "Family",
+    'War & Politics',
+  ];
+
   const handleSearch = () => {
     onSearch(searchText, firstGenre, secondGenre);
   };
@@ -38,6 +51,11 @@ const SearchBar = ({ onSearch }) => {
   }
 
   useEffect(handleSearch, [searchText, firstGenre, secondGenre]);
+
+  useEffect( () => {
+    onReset()
+    setGenres(mediaType == 'movie' ? movieGenres: tvGenres)
+  }, [mediaType])
 
   return (
     <div className="search-bar">

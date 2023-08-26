@@ -86,7 +86,7 @@ const MoviesDisplay = ({mediaType}) => {
   
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} mediaType={mediaType} />
       <MoviesList movies={displayMovies} />
     </div>
   );
