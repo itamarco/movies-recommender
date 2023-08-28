@@ -10,6 +10,11 @@ h1 {
   padding-top: 40px; /* Adjust this value to match the height of your top bar */
 }
 
+.loading-gif {
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+}
 
 /* movies list css */
 div.movies-list {

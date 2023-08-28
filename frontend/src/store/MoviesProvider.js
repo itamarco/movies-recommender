@@ -4,7 +4,7 @@ import { MoviesContext } from './MoviesContext';
 import axios from 'axios';
 
 export const MoviesProvider = ({ children }) => {
-  const initialState = { movies: [], tvs: [] };
+  const initialState = { movies: [], tvs: [], hasMoviesLoaded: false };
 
   const [state, dispatch] = useReducer(moviesReducer, initialState);
 
@@ -28,7 +28,7 @@ export const MoviesProvider = ({ children }) => {
   };
 
   return (
-    <MoviesContext.Provider value={{ movies: state.movies, tvs: state.tvs, dispatch, loadInitialMovies }}>
+    <MoviesContext.Provider value={{ movies: state.movies, tvs: state.tvs, hasMoviesLoaded: state.hasMoviesLoaded, dispatch, loadInitialMovies }}>
       {children}
     </MoviesContext.Provider>
   );

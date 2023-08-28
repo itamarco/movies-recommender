@@ -12,7 +12,7 @@ const MoviesDisplay = ({mediaType}) => {
   const [firstGenre, setFirstGenre] = useState("");
   const [secondGenre, setSecondGenre] = useState("");
 
-  const {movies, tvs} =  useContext(MoviesContext);
+  const {movies, tvs, hasMoviesLoaded} =  useContext(MoviesContext);
 
   const filteredMovies = useMemo(() => {
    
@@ -40,7 +40,7 @@ const MoviesDisplay = ({mediaType}) => {
       );
     }
 
-    return filteredMovies;
+    return filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
   }, [searchTerm, firstGenre, secondGenre, mediaType, movies, tvs]);
 
 
@@ -83,11 +83,13 @@ const MoviesDisplay = ({mediaType}) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [displayMovies, filteredMovies]);
-  
+
   return (
     <div>
       <SearchBar onSearch={handleSearch} mediaType={mediaType} />
-      <MoviesList movies={displayMovies} />
+      {
+        hasMoviesLoaded ? <MoviesList movies={displayMovies} /> : <img src="/loading.gif" alt="Loading..." className='loading-gif' />         
+      }
     </div>
   );
 };

@@ -21,9 +21,11 @@ This repository contains the code for the Movie Recommender App, a React applica
 # USAGE
 ## Prerequisites
 
-- Docker: You'll need [Docker](https://www.docker.com/get-started) installed on your machine.
+- [Docker](https://www.docker.com/get-started)
+- [Git LFS](https://git-lfs.com/) (For large files versioning)
 
  ```bash
+git lfs pull 
 docker-compose up
 ```
 
