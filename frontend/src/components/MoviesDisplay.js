@@ -11,6 +11,7 @@ const MoviesDisplay = ({mediaType}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [firstGenre, setFirstGenre] = useState("");
   const [secondGenre, setSecondGenre] = useState("");
+  const [avoidGenre, setAvoidGenre] = useState("");
 
   const {movies, tvs, hasMoviesLoaded} =  useContext(MoviesContext);
 
@@ -40,8 +41,14 @@ const MoviesDisplay = ({mediaType}) => {
       );
     }
 
+    if (avoidGenre) {
+      filteredMovies = filteredMovies.filter((movie) =>
+        !movie.genres.includes(avoidGenre)
+      );
+    }
+
     return filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
-  }, [searchTerm, firstGenre, secondGenre, mediaType, movies, tvs]);
+  }, [searchTerm, firstGenre, secondGenre, avoidGenre, mediaType, movies, tvs]);
 
 
   const fetchMovies = () => {
@@ -52,10 +59,11 @@ const MoviesDisplay = ({mediaType}) => {
     setDisplayMovies((prevMovies) => [...prevMovies, ...newMovies]);
   };
 
-  const handleSearch = (term, firstGenre, secondGenre) => {
+  const handleSearch = (term, firstGenre, secondGenre, avoidGenre) => {
     setSearchTerm(term);
     setFirstGenre(firstGenre);
     setSecondGenre(secondGenre);
+    setAvoidGenre(avoidGenre)
     setDisplayMovies([]); // Clear the current movies
     setPage(1); // Reset to the first page
   };

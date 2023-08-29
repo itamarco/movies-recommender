@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 const SearchBar = ({ onSearch, mediaType }) => {
   const [firstGenre, setFirstGenre] = useState("");
   const [secondGenre, setSecondGenre] = useState("");
+  const [avoidGenre, setAvoidGenre] = useState("");
   const [searchText, setSearchText] = useState("");
   const [genres, setGenres] = useState([]);
 
@@ -41,7 +42,7 @@ const SearchBar = ({ onSearch, mediaType }) => {
   ];
 
   const handleSearch = () => {
-    onSearch(searchText, firstGenre, secondGenre);
+    onSearch(searchText, firstGenre, secondGenre, avoidGenre);
   };
 
   const onReset = () => {
@@ -50,7 +51,7 @@ const SearchBar = ({ onSearch, mediaType }) => {
     setSecondGenre("")
   }
 
-  useEffect(handleSearch, [searchText, firstGenre, secondGenre]);
+  useEffect(handleSearch, [searchText, firstGenre, secondGenre, avoidGenre]);
 
   useEffect( () => {
     onReset()
@@ -74,6 +75,7 @@ const SearchBar = ({ onSearch, mediaType }) => {
         ))}
       </select>
       {firstGenre && (
+        <>
         <select onChange={(e) => setSecondGenre(e.target.value)}>
           <option value="">Select Second Genre</option>
           {genres
@@ -84,6 +86,17 @@ const SearchBar = ({ onSearch, mediaType }) => {
               </option>
             ))}
         </select>
+        <select onChange={(e) => setAvoidGenre(e.target.value)}>
+          <option value="">Avoid Genre</option>
+          {genres
+            .filter((genre) => genre !== firstGenre)
+            .map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+        </select>
+        </>
       )}
       <button onClick={onReset} className="reset-button">
         Reset
