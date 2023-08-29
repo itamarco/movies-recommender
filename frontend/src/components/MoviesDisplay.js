@@ -87,9 +87,15 @@ const MoviesDisplay = ({mediaType}) => {
   return (
     <div>
       <SearchBar onSearch={handleSearch} mediaType={mediaType} />
-      {
-        hasMoviesLoaded ? <MoviesList movies={displayMovies} /> : <img src="/loading.gif" alt="Loading..." className='loading-gif' />         
-      }
+      {hasMoviesLoaded ? (
+        <MoviesList movies={displayMovies} />
+      ) : (
+        <img
+          src="/static/loading.gif"
+          alt="Loading..."
+          className="loading-gif"
+        />
+      )}
     </div>
   );
 };
