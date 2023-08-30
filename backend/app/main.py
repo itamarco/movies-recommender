@@ -1,3 +1,5 @@
+import logging
+from datetime import datetime
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -5,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from starlette.requests import Request
 from starlette.responses import HTMLResponse, FileResponse
 
 from utils import load_movies_similarity_models, SimilarityRecommender, load_tvs_similarity_models
@@ -29,6 +32,23 @@ def init_tvs_recommender():
 similar_movies = init_movies_recommender()
 similar_tvs = init_tvs_recommender()
 
+# Configure separate logger
+ip_logger = logging.getLogger('ip_logger')
+handler = logging.FileHandler('site_visits.log')
+ip_logger.addHandler(handler)
+ip_logger.setLevel(logging.INFO)
+
+
+@app.middleware("http")
+async def log_visit(request: Request, call_next):
+    ip = request.client.host
+    path = request.url.path
+    if path == '/':
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ip_logger.info(f"{ip}\t{timestamp}")
+
+    response = await call_next(request)
+    return response
 
 @app.get("/")
 def read_root():
