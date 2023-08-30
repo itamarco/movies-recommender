@@ -5,19 +5,17 @@ services:
     build: ./backend/
     ports:
       - "8000:80"
-    environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/movies
+    env_file:
+      - .env.local
     depends_on:
       - db
 
   db:
     image: postgres:latest
     ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: movies
+      - "5432:5432"
+    env_file:
+      - .env.local
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
