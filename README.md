@@ -2,8 +2,10 @@
 
 This repository contains the code for the Movie Recommender App, a React application, backed with fastapi app, that provides movie recommendations based on user preferences and similar movie content.
 
-![My Image Description](./readme/screenshot.png)
+### [👻 Live Demo](http://cinema.itamar.live)
 
+
+![My Image Description](./readme/screenshot.png)
 
 ## Structure
 
