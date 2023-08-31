@@ -61,6 +61,11 @@ def get_recommendation_by_movie(tv_id: int, db: Session = Depends(db_session_gen
     return similar_tvs.get_recommendations_by_id(tv_id)
 
 
+@router.get("/votes/{user_id}")
+def get_votes(user_id: int, db: Session = Depends(db_session_gen)):
+    return db.query(Vote).filter_by(user_id=user_id).all()
+
+
 class VotePayload(BaseModel):
     vote: int
 
@@ -68,7 +73,7 @@ class VotePayload(BaseModel):
 @router.post("/vote/{movie_id}")
 def post_vote(movie_id: int, payload: VotePayload, db: Session = Depends(db_session_gen)):
     vote = Vote(
-        user_id=1,
+        user_id=200_000,
         movie_id=movie_id,
         vote=payload.vote
     )
@@ -77,6 +82,7 @@ def post_vote(movie_id: int, payload: VotePayload, db: Session = Depends(db_sess
     db.commit()
     db.refresh(merged_vote)
     return merged_vote
+
 
 
 """

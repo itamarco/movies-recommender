@@ -9,7 +9,7 @@ const SimilarMoviesList = ({ movieId, mediaType }) => {
   
   useEffect(() => {
     getSimilarMovies(movieId)
-  }, [movieId]);
+  }, []);
   
   const getSimilarMovies = async (movieId) => {
     try {
