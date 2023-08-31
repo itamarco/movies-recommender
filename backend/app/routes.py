@@ -47,8 +47,8 @@ def get_movies_map():
 
 @router.get("/recommendation/byUser/{user_id}")
 def get_recommendation_by_user(user_id: str, db: Session = Depends(db_session_gen)):
-    # Recommendation logic here
-    pass
+    file_path = Path("public/recommended.json")
+    return FileResponse(file_path)
 
 
 @router.get("/recommendation/byMovie/{movie_id}")
