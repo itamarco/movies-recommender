@@ -5,12 +5,14 @@ import { MoviesContext } from "../store/MoviesContext";
 import SimilarMoviesList from "./SimilarMovies";
 import TmdbImage from "./TmdbImage";
 import Vote from "./Vote";
+import TrailerModal from "./TrailerModal";
 
 const MoviePage = ({mediaType}) => {
   const { movieId } = useParams();
   const { movies, tvs } = useContext(MoviesContext);
-  
+
   const [movie, setMovie] = useState(null)
+
 
   useEffect( () => {
     const movieList = mediaType == "movie" ? movies : tvs;
@@ -35,6 +37,7 @@ const MoviePage = ({mediaType}) => {
           <div className="movie-popularity">
             <p>Popularity: {movie.popularity}</p>
           </div>
+          <TrailerModal movieId={movieId}/>
         </div>
         <div className="movie-right">
           <h1>{movie.title || movie.name}</h1>
