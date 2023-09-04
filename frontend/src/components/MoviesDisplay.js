@@ -25,6 +25,7 @@ const MoviesDisplay = ({mediaType}) => {
            movie.name?.toLowerCase().includes(term) ||
            movie.director?.toLowerCase().includes(term) ||
            movie.creators?.map( c => c.name).join(', ').toLowerCase().includes(term) ||
+           movie.production_companies?.join(', ').toLowerCase().includes(term) ||
            movie.cast.map( p => p.name ).join(', ').toLowerCase().includes(term);
       });
     }

@@ -41,8 +41,9 @@ const MoviePage = ({mediaType}) => {
         </div>
         <div className="movie-right">
           <h1>{movie.title || movie.name}</h1>
+          <p>{movie.year}</p>
           <p className="movie-tagline">{movie.tagline}</p>
-          <p className="movie-overview">{movie.overview_he}</p>
+          <p className="movie-overview">{movie.overview_he || movie.overview}</p>
           <div className="movie-genres">{movie.genres.join(", ")}</div>
           <div className="movie-cast">
             <div className="cast-gallery">
