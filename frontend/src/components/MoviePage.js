@@ -37,7 +37,7 @@ const MoviePage = ({mediaType}) => {
           <div className="movie-popularity">
             <p>Popularity: {movie.popularity}</p>
           </div>
-          <TrailerModal movieId={movieId}/>
+          <TrailerModal movieId={movieId} mediaType={mediaType}/>
         </div>
         <div className="movie-right">
           <h1>{movie.title || movie.name}</h1>

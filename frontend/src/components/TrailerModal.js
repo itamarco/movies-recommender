@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, youtubeKey }) => {
   );
 };
 
-const TrailerModal = ({movieId}) => {
+const TrailerModal = ({movieId, mediaType}) => {
   const tmdbApiKey = process.env.REACT_APP_TMDB_API_KEY;
   const [trailer, setTrailer] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -39,18 +39,17 @@ const TrailerModal = ({movieId}) => {
     };
 
       useEffect(() => {
-    // Fetch the trailer info
-    axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${tmdbApiKey}`)
-      .then(res => res.data)
-      .then(data => { 
-        const youtubeTrailer = data.results.find(video => video.site === 'YouTube');
-        if (youtubeTrailer) {
-          setTrailer(youtubeTrailer.key);
-        }
-      }).catch( err => {
-        console.error(err)
-      });
-  }, [movieId]);
+        axios.get(`https://api.themoviedb.org/3/${mediaType}/${movieId}/videos?api_key=${tmdbApiKey}`)
+          .then(res => res.data)
+          .then(data => { 
+            const youtubeTrailer = data.results.find(video => video.site === 'YouTube');
+            if (youtubeTrailer) {
+              setTrailer(youtubeTrailer.key);
+            }
+          }).catch( err => {
+            console.error(err)
+          });
+      }, [movieId]);
 
   
     return  (
